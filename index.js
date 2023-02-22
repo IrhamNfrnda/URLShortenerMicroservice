@@ -34,11 +34,7 @@ app.get('/api/shorturl/:shorturl', function (req, res) {
       })
     }
 
-  })
-
-  
-
-
+  }) 
 })
 
 app.post('/api/shorturl', function (req, res) {
@@ -59,28 +55,28 @@ app.post('/api/shorturl', function (req, res) {
       mes:'okkay'
     })
     
-    // while(dataBase.find(record => record.short_url === shortUrl)){
-    //   shortUrl++;
-    // }
+    while(dataBase.find(record => record.short_url === shortUrl)){
+      shortUrl++;
+    }
 
-    // let newData = {
-    //   originalUrl: originalUrl,
-    //   short_url: shortUrl
-    // }
+    let newData = {
+      originalUrl: originalUrl,
+      short_url: shortUrl
+    }
 
-    // dataBase.push(newData);
+    dataBase.push(newData);
   
-    // fs.writeFile(filePath, JSON.stringify(dataBase), 'utf8', err => {
-    //   if (err) {
-    //     return res.json({
-    //       error: err
-    //     })
-    //   }
-    //   return res.json({
-    //     original_url: originalUrl,
-    //     short_url: shortUrl
-    //   });
-    // });
+    fs.writeFile(filePath, JSON.stringify(dataBase), 'utf8', err => {
+      if (err) {
+        return res.json({
+          error: err
+        })
+      }
+      return res.json({
+        original_url: originalUrl,
+        short_url: shortUrl
+      });
+    });
   });
 })
 
